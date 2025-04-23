@@ -22,6 +22,6 @@ class User < ApplicationRecord
     hmac_secret = Rails.application.credentials.config[:hmac_secret]
     payload = { id: id }
 
-    token = JWT.encode(payload, hmac_secret, 'HS256')
+    JWT.encode(payload, hmac_secret, 'HS256')
   end
 end
