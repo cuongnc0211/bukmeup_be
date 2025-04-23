@@ -49,6 +49,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # unint testing gems
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -68,3 +73,5 @@ gem "graphql", "~> 2.5"
 
 gem 'rack-cors'
 gem "graphiql-rails", group: :development
+
+gem 'jwt'
