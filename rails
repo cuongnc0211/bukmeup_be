@@ -1,0 +1,4 @@
+production:
+  hmac_secret: bukmeup_com_salt
+development:
+  hmac_secret: bukmeup_com_salt

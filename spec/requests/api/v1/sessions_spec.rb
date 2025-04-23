@@ -8,7 +8,7 @@ RSpec.describe "POST /api/v1/login", type: :request do
       post '/api/v1/login', params: { email: user.email, password: 'password' }
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('token')
+      expect(response.body).to include('auth_token')
     end
   end
 
