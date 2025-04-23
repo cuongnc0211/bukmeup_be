@@ -1,4 +1,4 @@
-class BaseApiController < ActionController::API
+class Api::SignedInController < Api::BaseController
   before_action :authenticate_access_token
   before_action :authenticate_user_from_token!
 
