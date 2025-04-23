@@ -1,27 +1,40 @@
 class Api::SignedInController < Api::BaseController
-  before_action :authenticate_access_token
   before_action :authenticate_user_from_token!
 
   private
 
-  def authenticate_access_token
-    true
-  end
-
+  # Main authentication method that handles token validation
   def authenticate_user_from_token!
-    prefix, token = request.headers["Authorization"]&.split(" ")
-    return if token.blank? || prefix != 'Bearer'
+    token = extract_token_from_authorization_header
 
-    user_id = decode_jwt(token)
-    @current_user = User.find_by(id: user_id)
+    @current_user = User.find_by(auth_token: token)
+    raise UnauthorizedError, "Invalid or expired token" if @current_user.nil?
   end
 
+  # Extract token from Authorization header
+  def extract_token_from_authorization_header
+    authorization_header = request.headers["Authorization"]
+    raise UnauthorizedError, "Missing or malformed Authorization header" if authorization_header.blank?
+
+    prefix, token = authorization_header.split(" ")
+    raise UnauthorizedError, "Invalid token format" unless prefix == 'Bearer'
+
+    token
+  end
+
+  # Decode the JWT token
   def decode_jwt(token)
-    JWT.decode(token, Rails.application.secret_key_base)[0]["sub"]
-  rescue
-    nil
+    hmac_secret = Rails.application.credentials.config[:hmac_secret]
+    decoded_token = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' }).first
+
+    raise UnauthorizedError, "Invalid token" if decoded_token.blank? || decoded_token['id'].blank?
+
+    decoded_token
+  rescue JWT::DecodeError
+    raise UnauthorizedError, "Invalid or expired token"
   end
 
+  # Current user accessible throughout the controller
   def current_user
     @current_user
   end
