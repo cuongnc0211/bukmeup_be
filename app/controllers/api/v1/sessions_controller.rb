@@ -14,6 +14,14 @@ module Api
     end
 
     def logout
+      token = params[:auth_token]
+
+      if token && (user = User.validate_token(token))
+        user.update_column(:auth_token, nil)
+        render json: {msg: "Auth token revoked!"}, status: :ok
+      else
+        render json: { error: 'Invalid auth token' }, status: :unauthorized
+      end
     end
   end
 end
