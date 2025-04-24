@@ -1,5 +1,6 @@
 class Api::SignedInController < Api::BaseController
   before_action :authenticate_devise_api_token!
+  # before_action :authenticate_api!
   helper_method :current_user
 
   private

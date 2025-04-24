@@ -3,7 +3,18 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/api/v1/users/profile":
+    get:
+      summary: get profile
+      tags:
+      - Get Profile
+      parameters:
+      - name: Authorization
+        in: header
+      responses:
+        '200':
+          description: successful logout
 servers:
 - url: http://{defaultHost}
   variables:
