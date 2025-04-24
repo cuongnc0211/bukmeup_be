@@ -12,5 +12,9 @@ module Api
         render json: { error: 'Invalid credentials' }, status: :unauthorized
       end
     end
+
+    def sign_up
+      # accept: email, first_name, last_name, user_name, password
+    end
   end
 end

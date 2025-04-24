@@ -82,3 +82,5 @@ gem 'rswag-ui'
 gem 'rswag-specs'
 
 gem "blueprinter", "~> 1.1"
+
+gem "devise-api", "~> 0.2.0"
