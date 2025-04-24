@@ -75,3 +75,8 @@ gem 'rack-cors'
 gem "graphiql-rails", group: :development
 
 gem 'jwt'
+
+# api documentation
+gem 'rswag-api'
+gem 'rswag-ui'
+gem 'rswag-specs'
