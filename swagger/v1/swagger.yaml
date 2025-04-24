@@ -3,42 +3,7 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths:
-  "/api/v1/login":
-    post:
-      summary: User login
-      tags:
-      - Authentication
-      parameters: []
-      responses:
-        '200':
-          description: successful login
-        '401':
-          description: invalid credentials
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-              required:
-              - email
-              - password
-  "/api/v1/logout":
-    post:
-      summary: User logout
-      tags:
-      - Authentication
-      parameters:
-      - name: Authorization
-        in: header
-      responses:
-        '200':
-          description: successful logout
+paths: {}
 servers:
 - url: http://{defaultHost}
   variables:

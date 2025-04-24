@@ -1,12 +1,9 @@
 module Api
   class V1::UsersController < SignedInController
-    def logout
-      if current_user
-        current_user.update_column(:auth_token, nil)
-        render json: {msg: "Auth token revoked!"}, status: :ok
-      else
-        render json: { error: 'Invalid auth token' }, status: :unauthorized
-      end
+    def show
+      user = User.find(params[:id])
+
+      render json: puts UserBlueprint.render(user)
     end
   end
 end
