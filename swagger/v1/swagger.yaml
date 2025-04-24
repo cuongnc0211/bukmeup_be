@@ -4,11 +4,46 @@ info:
   title: API V1
   version: v1
 paths:
+  "/users/tokens/sign_in":
+    post:
+      summary: User login
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful login
+        '400':
+          description: invalid credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/users/tokens/revoke":
+    post:
+      summary: User logout
+      tags:
+      - Authentication
+      parameters:
+      - name: Authorization
+        in: header
+      responses:
+        '204':
+          description: successful logout
   "/api/v1/users/profile":
     get:
       summary: get profile
       tags:
-      - Get Profile
+      - Users APIs
       parameters:
       - name: Authorization
         in: header
