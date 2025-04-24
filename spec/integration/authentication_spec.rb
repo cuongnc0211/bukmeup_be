@@ -84,7 +84,7 @@ RSpec.describe 'API V1', type: :request do
         end
       end
 
-      response '422', 'blank password' do
+      response '422', 'Record Invalid' do
         let(:payload) do
           {
             email: 'user_rspec@example.com',

@@ -49,7 +49,7 @@ paths:
         '201':
           description: successful signup
         '422':
-          description: blank password
+          description: Record Invalid
       requestBody:
         content:
           application/json:
