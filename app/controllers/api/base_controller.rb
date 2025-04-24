@@ -25,6 +25,6 @@ class Api::BaseController < ActionController::API
   end
 
   def unauthorized_error(error)
-    render json: { error: e.message.presence || "Unauthorized: Token is invalid" }, status: :unauthorized
+    render json: { error: error.message.presence || "Unauthorized: Token is invalid" }, status: :unauthorized
   end
 end

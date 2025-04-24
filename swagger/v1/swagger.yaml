@@ -28,6 +28,17 @@ paths:
               required:
               - email
               - password
+  "/api/v1/logout":
+    post:
+      summary: User logout
+      tags:
+      - Authentication
+      parameters:
+      - name: Authorization
+        in: header
+      responses:
+        '200':
+          description: successful logout
 servers:
 - url: http://{defaultHost}
   variables:

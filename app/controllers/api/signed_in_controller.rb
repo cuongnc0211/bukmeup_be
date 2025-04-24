@@ -1,5 +1,6 @@
 class Api::SignedInController < Api::BaseController
   before_action :authenticate_user_from_token!
+  helper_method :current_user
 
   private
 
@@ -20,18 +21,6 @@ class Api::SignedInController < Api::BaseController
     raise UnauthorizedError, "Invalid token format" unless prefix == 'Bearer'
 
     token
-  end
-
-  # Decode the JWT token
-  def decode_jwt(token)
-    hmac_secret = Rails.application.credentials.config[:hmac_secret]
-    decoded_token = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' }).first
-
-    raise UnauthorizedError, "Invalid token" if decoded_token.blank? || decoded_token['id'].blank?
-
-    decoded_token
-  rescue JWT::DecodeError
-    raise UnauthorizedError, "Invalid or expired token"
   end
 
   # Current user accessible throughout the controller
