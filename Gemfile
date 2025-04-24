@@ -80,3 +80,5 @@ gem 'jwt'
 gem 'rswag-api'
 gem 'rswag-ui'
 gem 'rswag-specs'
+
+gem "blueprinter", "~> 1.1"
