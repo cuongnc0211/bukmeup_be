@@ -316,7 +316,7 @@ end
 Devise.setup do |config|
   config.api.configure do |api|
     # Access Token
-    api.access_token.expires_in = 1.hour
+    api.access_token.expires_in = 3.days
     api.access_token.expires_in_infinite = ->(_resource_owner) { false }
     api.access_token.generator = ->(_resource_owner) { Devise.friendly_token(60) }
 
@@ -329,7 +329,7 @@ Devise.setup do |config|
 
     # Sign up
     api.sign_up.enabled = true
-    api.sign_up.extra_fields = []
+    api.sign_up.extra_fields = %w[first_name last_name phone_number]
 
     # Authorization
     api.authorization.key = 'Authorization'

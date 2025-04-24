@@ -39,6 +39,38 @@ paths:
       responses:
         '204':
           description: successful logout
+  "/users/tokens/sign_up":
+    post:
+      summary: User signup
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '201':
+          description: successful signup
+        '422':
+          description: blank password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone_number:
+                  type: string
+              required:
+              - email
+              - password
+              - first_name
+              - last_name
   "/api/v1/users/profile":
     get:
       summary: get profile
