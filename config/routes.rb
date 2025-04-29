@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: :index
       get "/users/profile", to: "users#profile"
+      post "/users/confirm_email", to: "users#confirm_email"
     end
   end
 end
