@@ -5,5 +5,6 @@ FactoryBot.define do
     expires_in { Time.zone.now + 3.days }
     revoked_at { nil }
     previous_refresh_token { '' }
+    resource_owner { User.new }
   end
 end

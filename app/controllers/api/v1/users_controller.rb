@@ -5,7 +5,7 @@ module Api
     end
 
     def confirm_email
-      @user = User.find_by(confirmation_token: params[:token])
+      @user = User.find_by(confirmation_token: params[:confirmation_token])
 
       if @user && @user.confirmation_sent_at <= Time.zone.now + 15.minutes
         render json: { msg: "active successfully" }, status: :ok
