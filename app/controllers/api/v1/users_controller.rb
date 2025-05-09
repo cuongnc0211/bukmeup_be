@@ -5,9 +5,10 @@ module Api
     end
 
     def update
-      current_user.update!(user_attributes)
+      user = current_user
+      user.update!(user_attributes)
 
-      render json: UserBlueprint.render(current_user.reload)
+      render json: UserBlueprint.render(user), status: :ok
     end
 
     def confirm_email

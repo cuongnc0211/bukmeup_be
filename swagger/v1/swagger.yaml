@@ -113,6 +113,67 @@ paths:
                   type: string
               required:
               - confirmation_token
+  "/api/v1/users/3":
+    put:
+      summary: Update current user profile
+      tags:
+      - Users APIs
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user updated successfully
+          content:
+            application/json:
+              examples:
+                user profile updated:
+                  value:
+                    id: 1
+                    email: john.doe@example.com
+                    first_name: John
+                    last_name: Doe
+                    phone_number: 0355xxxyyy
+                    avatar_url: https://bukmeup.com/rails/active_storage/blobs/.../avatar.jpg
+                    cover_url: https://bukmeup.com/rails/active_storage/blobs/.../cover.jpg
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  email:
+                    type: string
+                  full_name:
+                    type: string
+                  phone_number:
+                    type: string
+                  avatar_url:
+                    type: string
+                    nullable: true
+                  cover_url:
+                    type: string
+                    nullable: true
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    error: Unauthorized
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
 servers:
 - url: http://{defaultHost}
   variables:
