@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: :index
+      resources :users, only: %i[index update]
       get "/users/profile", to: "users#profile"
       post "/users/confirm_email", to: "users#confirm_email"
     end

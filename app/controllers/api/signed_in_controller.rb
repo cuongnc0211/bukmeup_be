@@ -26,6 +26,6 @@ class Api::SignedInController < Api::BaseController
 
   # Current user accessible throughout the controller
   def current_user
-    @current_user
+    current_devise_api_token.resource_owner
   end
 end
