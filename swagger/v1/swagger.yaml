@@ -82,6 +82,37 @@ paths:
       responses:
         '200':
           description: successful logout
+          content:
+            application/json:
+              examples:
+                sample:
+                  value:
+                    id: 123
+                    email: demo@example.com
+                    first_name: Cuong
+                    last_name: Nguyen
+                    phone_number: 0355xxxyyy
+  "/api/v1/users/confirm_email":
+    post:
+      summary: confirm success
+      tags:
+      - Authentication
+      parameters:
+      - name: Authorization
+        in: header
+      responses:
+        '200':
+          description: ok
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirmation_token:
+                  type: string
+              required:
+              - confirmation_token
 servers:
 - url: http://{defaultHost}
   variables:

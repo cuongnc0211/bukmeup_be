@@ -3,8 +3,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'API V1', type: :request do
-  let!(:user) { create(:user) }
-  let!(:token) { create(:devise_api_token, resource_owner: user, access_token: 'authen_token') }
+  
 
   path '/api/v1/users/profile' do
     get 'get profile' do
@@ -14,7 +13,19 @@ RSpec.describe 'API V1', type: :request do
 
       response '200', 'successful logout' do
         let(:Authorization) { 'Bearer authen_token' }
-        
+        let!(:user) { create(:user) }
+        let!(:token) { create(:devise_api_token, resource_owner: user, access_token: 'authen_token') }
+        let(:response_example) { JSON.parse(UserBlueprint.render(user).to_json) }
+
+        example 'application/json', 'sample', {
+          id: 123,
+          email: 'demo@example.com',
+          first_name: 'Cuong',
+          last_name: 'Nguyen',
+          phone_number: '0355xxxyyy',
+        }
+
+
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data['id']).to eq(user.id)
@@ -43,6 +54,8 @@ RSpec.describe 'API V1', type: :request do
       response '200', 'ok' do
         let(:Authorization) { 'Bearer authen_token' }
         let(:confirmation_token) { { confirmation_token: 'valid_token' } }
+        let!(:user) { create(:user) }
+        let!(:token) { create(:devise_api_token, resource_owner: user, access_token: 'authen_token') }
         
         run_test!
       end

@@ -18,7 +18,7 @@ RSpec.describe 'API V1', type: :request do
       }
 
       response '200', 'successful login' do
-        let(:user) { create(:user) }
+        let(:user) { create(:user, confirmed_at: 10.minutes.ago) }
         let(:payload) { {email: user.email, password: 'password'} }
         
         run_test!
